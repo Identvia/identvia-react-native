@@ -1,3 +1,11 @@
 node_modules/
 dist/
 plugin/build/
+coverage/
+*.tgz
+*.log
+.expo/
+.DS_Store
+example/android/
+example/ios/
+live-*.json
