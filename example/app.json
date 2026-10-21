@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Identvia Notes",
+    "slug": "identvia-notes",
+    "scheme": "com.example.identvianotes",
+    "ios": { "bundleIdentifier": "com.example.identvianotes" },
+    "android": { "package": "com.example.identvianotes" },
+    "plugins": [["@identvia/react-native", { "redirectUri": "com.example.identvianotes:/oauth/identvia" }], "expo-secure-store"]
+  }
+}

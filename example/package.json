@@ -1,0 +1,15 @@
+{
+  "name": "identvia-react-native-example",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": { "start": "expo start", "ios": "expo run:ios", "android": "expo run:android" },
+  "dependencies": {
+    "@identvia/react-native": "file:..",
+    "expo": "~52.0.0",
+    "expo-crypto": "~14.0.1",
+    "expo-secure-store": "~14.0.0",
+    "expo-web-browser": "~14.0.1",
+    "react": "18.3.1",
+    "react-native": "0.76.3"
+  }
+}
