@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-05)
+
+- Example: use a **Native & desktop** portal client for the Expo / custom-scheme redirect.
+
 ## 0.1.1 (2026-10-21)
 
 - Repository hygiene: `.gitignore` now excludes build output, packages, Expo prebuild folders and local live-test state. No code changes.

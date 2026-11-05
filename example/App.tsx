@@ -31,7 +31,7 @@ function Home() {
 export default function App() {
   return (
     <IdentviaProvider
-      clientId={process.env.EXPO_PUBLIC_IDENTVIA_CLIENT_ID ?? 'oid_your_public_client_id'}
+      clientId={process.env.EXPO_PUBLIC_IDENTVIA_CLIENT_ID ?? 'oid_your_native_client_id'}
       redirectUri="com.example.identvianotes:/oauth/identvia"
       scopes={['email', 'profile', 'offline_access']}
     >
