@@ -1,13 +1,17 @@
 {
   "name": "@identvia/react-native",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Sign in with Identvia for React Native and Expo: system browser (ASWebAuthenticationSession / Custom Tabs), PKCE S256, secure storage, refresh-token rotation, Expo config plugin.",
   "license": "MIT",
   "author": "Identvia <hello@identvia.com>",
-  "homepage": "https://id.identvia.com/developers/docs/react-native",
+  "homepage": "https://identvia.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/identvia/identvia-react-native.git"
+    "url": "git+https://github.com/Identvia/identvia-react-native.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Identvia/identvia-react-native/issues",
+    "email": "hello@identvia.com"
   },
   "keywords": [
     "identvia",
@@ -75,5 +79,9 @@
     },
     "./app.plugin.js": "./app.plugin.js",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

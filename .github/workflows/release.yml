@@ -1,0 +1,48 @@
+# Publishes @identvia/react-native to npm when a version tag (v1.2.3) is pushed.
+#
+# Auth: npm trusted publishing (OIDC). npmjs.com -> @identvia/react-native -> Settings -> Trusted publishing ->
+# GitHub Actions: organization/user "Identvia", repository "identvia-react-native", workflow "release.yml",
+# environment "npm", allowed action "npm publish". Provenance is generated automatically.
+# Bootstrap only (before the package exists on npm): an optional NPM_TOKEN secret is used as a fallback.
+# Delete that secret once trusted publishing is configured.
+#
+# A version that is already on npm is skipped, so re-running this workflow is safe.
+# Run it manually (workflow_dispatch) for a dry run.
+name: Release
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency: { group: release-npm, cancel-in-progress: false }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing (OIDC) and provenance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, registry-url: 'https://registry.npmjs.org' }
+      - name: npm 11.5.1+ is required for trusted publishing
+        run: npm install -g npm@11 && npm --version
+      - run: npm install --legacy-peer-deps
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: Tag matches package version
+        if: github.ref_type == 'tag'
+        run: |
+          v=$(node -p "require('./package.json').version")
+          [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "::error::package.json is $v but the tag is $GITHUB_REF_NAME"; exit 1; }
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: ${{ github.ref_type == 'tag' && '' || '--dry-run' }}
+        run: |
+          name=$(node -p "require('./package.json').name"); ver=$(node -p "require('./package.json').version")
+          if npm view "$name@$ver" version >/dev/null 2>&1; then echo "$name@$ver is already on npm; skipping"; exit 0; fi
+          npm publish --access public --provenance $DRY_RUN

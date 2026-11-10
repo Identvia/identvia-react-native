@@ -1,5 +1,9 @@
 # @identvia/react-native
 
+[![npm](https://img.shields.io/npm/v/@identvia/react-native)](https://www.npmjs.com/package/@identvia/react-native)
+[![CI](https://github.com/Identvia/identvia-react-native/actions/workflows/ci.yml/badge.svg)](https://github.com/Identvia/identvia-react-native/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Identvia/identvia-react-native/blob/main/LICENSE)
+
 Sign in with Identvia for React Native and Expo.
 
 * **System browser only:** ASWebAuthenticationSession on iOS and Chrome Custom Tabs on Android, through `expo-web-browser`. The SDK never uses an embedded WebView, as RFC 8252 requires.
@@ -75,4 +79,4 @@ IDENTVIA_LIVE_STATE=/tmp/live-state.json npx vitest run -c vitest.live.config.ts
 
 The example Expo app is in `example/`.
 
-MIT licensed.
+Docs: https://identvia.com · MIT licensed.

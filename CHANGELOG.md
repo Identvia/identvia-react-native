@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 (2026-11-09)
+
+- First release on the npm registry. Publishing runs from GitHub Actions (`release.yml`) with npm trusted publishing (OIDC) and provenance.
+- Package metadata: homepage `https://identvia.com`, repository `github.com/Identvia/identvia-react-native`, `bugs` and `publishConfig`. No code changes.
+
 ## 0.1.2 (2026-11-05)
 
 - Example: use a **Native & desktop** portal client for the Expo / custom-scheme redirect.
