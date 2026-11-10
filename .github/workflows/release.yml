@@ -13,6 +13,11 @@ on:
   push:
     tags: ['v[0-9]+.[0-9]+.[0-9]+']
   workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Really publish (otherwise a dry run)'
+        type: boolean
+        default: false
 permissions: { contents: read }
 concurrency: { group: release-npm, cancel-in-progress: false }
 jobs:
@@ -41,8 +46,8 @@ jobs:
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          DRY_RUN: ${{ github.ref_type == 'tag' && '' || '--dry-run' }}
+          DRY_RUN: ${{ (github.ref_type == 'tag' || inputs.publish) && 'no' || 'yes' }}
         run: |
           name=$(node -p "require('./package.json').name"); ver=$(node -p "require('./package.json').version")
           if npm view "$name@$ver" version >/dev/null 2>&1; then echo "$name@$ver is already on npm; skipping"; exit 0; fi
-          npm publish --access public --provenance $DRY_RUN
+          npm publish --access public --provenance $([ "$DRY_RUN" = yes ] && echo --dry-run)
